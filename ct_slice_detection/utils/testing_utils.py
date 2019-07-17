@@ -106,7 +106,7 @@ def predict_and_evaluate(args, test_data, modelwrapper, suffix=''):
     os.makedirs(out_path, exist_ok=True)
     df = pd.DataFrame(columns=['y', 'pred_y', 'error_mm', 'error_slice', 'slice_thickness'])
     if args.mode == 'heatmap':
-        for i, (image, image2, y, name, spacing) in enumerate(zip(test_data.x_val, test_data.x_val2, test_data.y_val,
+        for i, (image, y, name, spacing) in enumerate(zip(test_data.x_val, test_data.y_val,
                                                           test_data.names_val, test_data.spacings_val)):
 
 
@@ -137,12 +137,12 @@ def predict_and_evaluate(args, test_data, modelwrapper, suffix=''):
             if pred_map.shape[1] == 1:
                 pred_map = np.expand_dims(np.concatenate([pred_map]*img.shape[2],axis=1),2)
             img = overlay_heatmap_on_image(img, pred_map)
-            img = np.hstack([img[0], gray2rgb(to256(preprocess_test_image(image2)[:height, :]))])
+            img = np.hstack([img[0], gray2rgb(to256(preprocess_test_image(image)[:height, :]))])
             img = place_line_on_img(img, y, pred_y, r=1)
 
 
 
-            imageio.imwrite(os.path.join(sub_dir, str(i) + '_' + name + '_map'+suffix+'.jpg'),
+            imageio.imwrite(os.path.join(sub_dir, str(i) + '_' + str(name) + '_map'+suffix+'.jpg'),
                             np.clip(img, 0, 255).astype(np.uint8))
 
             # img = place_line_on_img(np.hstack([X[:, :, np.newaxis], X_s[:, :, np.newaxis]]), y, m, r=1)

@@ -12,6 +12,11 @@ from ct_slice_detection.io.augmentation import *
 from ct_slice_detection.io.generators import threadsafe_generator
 from ct_slice_detection.io.preprocessing import *
 
+# Monkeypatch load to allow_pickle
+# https://stackoverflow.com/questions/55890813/how-to-fix-object-arrays-cannot-be-loaded-when-allow-pickle-false-for-imdb-loa
+np_load_old = np.load
+np.load = lambda *a, **k: np_load_old(*a, allow_pickle=True, **k)
+
 
 def load_data(data_path):
     print('loading data')
@@ -36,8 +41,8 @@ def normalise_spacing_and_preprocess(images, images_sagittal, slice_locations, s
     images_s_norm = []
     slice_loc_norm = []
     for image, image_s, loc, s in zip(images, images_sagittal, slice_locations, spacings):
-        img = zoom(image, [s[2] / new_spacing, s[0] / new_spacing])
-        img_s = zoom(image_s, [s[2] / new_spacing, s[0] / new_spacing])
+        img = zoom(image, [s[0] / new_spacing, s[1] / new_spacing])
+        img_s = zoom(image_s, [s[0] / new_spacing, s[1] / new_spacing])
         images_norm.append(preprocess_to_8bit(img))
         images_s_norm.append(preprocess_to_8bit(img_s))
         slice_loc_norm.append(int(loc * s[2] / new_spacing))
