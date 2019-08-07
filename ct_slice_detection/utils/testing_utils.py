@@ -111,7 +111,6 @@ def predict_and_evaluate(args, test_data, modelwrapper, suffix=''):
 
 
             printProgressBar(i, len(test_data.x_val))
-
             slice_thickness = spacing[2]
             height = image.shape[0]
 

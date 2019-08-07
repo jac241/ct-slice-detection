@@ -17,7 +17,8 @@ requirements = [ 'scipy',
                  'opencv-contrib-python',
                  'numpy',
                  'scikit-learn',
-                 'imageio']
+                 'imageio',
+                 'imgaug']
 
 setup_requirements = [ ]
 
