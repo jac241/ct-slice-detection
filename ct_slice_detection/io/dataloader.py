@@ -41,11 +41,12 @@ def normalise_spacing_and_preprocess(images, images_sagittal, slice_locations, s
     images_s_norm = []
     slice_loc_norm = []
     for image, image_s, loc, s in zip(images, images_sagittal, slice_locations, spacings):
-        img = zoom(image, [s[0] / new_spacing, s[1] / new_spacing])
-        img_s = zoom(image_s, [s[0] / new_spacing, s[1] / new_spacing])
+        img = zoom(image, [s[2] / new_spacing, s[0] / new_spacing])
+        img_s = zoom(image_s, [s[2] / new_spacing, s[0] / new_spacing])
         images_norm.append(preprocess_to_8bit(img))
         images_s_norm.append(preprocess_to_8bit(img_s))
         slice_loc_norm.append(int(loc * s[2] / new_spacing))
+
 
     return np.array(images_norm), np.array(images_s_norm), np.array(slice_loc_norm)
 
