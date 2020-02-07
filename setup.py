@@ -5,11 +5,6 @@
 
 from setuptools import setup, find_packages
 
-with open('README.md') as readme_file:
-    readme = readme_file.read()
-
-with open('HISTORY.rst') as history_file:
-    history = history_file.read()
 
 requirements = [ 'scipy',
                  'keras',
@@ -48,7 +43,7 @@ setup(
         },
     install_requires=requirements,
     license="BSD license",
-    long_description=readme + '\n\n' + history,
+    long_description='',
     include_package_data=True,
     keywords='ct_slice_detection',
     name='ct_slice_detection',

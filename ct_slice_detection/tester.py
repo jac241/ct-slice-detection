@@ -1,8 +1,8 @@
 import tensorflow as tf
 from keras.backend.tensorflow_backend import set_session
 
-from ct_slice_detection.io.dataloader import DataLoader
-from ct_slice_detection.io.parameters import parse_inputs
+from ct_slice_detection.inout.dataloader import DataLoader
+from ct_slice_detection.inout.parameters import parse_inputs
 from ct_slice_detection.models import Models
 from ct_slice_detection.utils.testing_utils import *
 
