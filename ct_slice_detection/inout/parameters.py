@@ -47,6 +47,8 @@ def parse_inputs():
                          section='train', help='enable dual output for regression')
     parser.add_parameter('do_checkpoint', bool, default=False,
                          section='train', help='enable model checkpoint saving')
+    parser.add_parameter('pretrained_model_path', str, default=None)
+
     args = parser.parse()
 
     return args
