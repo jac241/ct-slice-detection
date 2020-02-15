@@ -8,9 +8,13 @@ from scipy.ndimage.filters import gaussian_filter
 import imgaug as ia
 
 from ct_slice_detection.core.data_loader import BaseDataLoader
-from ct_slice_detection.io.augmentation import *
-from ct_slice_detection.io.generators import threadsafe_generator
-from ct_slice_detection.io.preprocessing import *
+from ct_slice_detection.inout.augmentation import *
+from ct_slice_detection.inout.generators import threadsafe_generator
+from ct_slice_detection.inout.preprocessing import *
+
+
+np_load_old = np.load
+np.load = lambda *a, **k: np_load_old(*a, allow_pickle=True, **k)
 
 # Monkeypatch load to allow_pickle
 # https://stackoverflow.com/questions/55890813/how-to-fix-object-arrays-cannot-be-loaded-when-allow-pickle-false-for-imdb-loa

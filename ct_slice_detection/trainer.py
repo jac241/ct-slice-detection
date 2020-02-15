@@ -2,15 +2,18 @@ import os
 
 import tensorflow as tf
 from keras.backend.tensorflow_backend import set_session
+from keras.models import load_model
 from sklearn.model_selection import KFold
 
-from ct_slice_detection.io.dataloader import DataLoader
-from ct_slice_detection.io.parameters import parse_inputs
+from ct_slice_detection.inout.dataloader import DataLoader
+from ct_slice_detection.inout.parameters import parse_inputs
 from ct_slice_detection.models import Models
 from ct_slice_detection.utils.training_utils import PreviewOutput
 
 
 def cross_validate(baseModel, args):
+    pretrained_model = None
+
     trainer_data = DataLoader(args)
     kf = KFold(n_splits=args.n_splits, random_state=args.random_state, shuffle=True)
     num_samples = trainer_data.get_num_samples()
@@ -27,6 +30,7 @@ def cross_validate(baseModel, args):
 
         # Setup model
         model_name = args.model_name + '_cv_' + str(idx + 1) + '_of_' + str(args.n_splits)
+
         modelwrapper = baseModel(name=model_name,
                                    config=args,
                                    input_shape=args.model_input_shape,
@@ -52,7 +56,6 @@ def main():
     args = parse_inputs()
 
     print(args)
-
     # GPU allocation options
     config = tf.ConfigProto()
     config.gpu_options.allow_growth = True

@@ -7,8 +7,8 @@ import time
 from scipy.stats import pearsonr
 from scipy.ndimage import zoom
 
-from ct_slice_detection.io.dataloader import image_slide_generator
-from ct_slice_detection.io.preprocessing import *
+from ct_slice_detection.inout.dataloader import image_slide_generator
+from ct_slice_detection.inout.preprocessing import *
 from .generic_utils import printProgressBar
 
 

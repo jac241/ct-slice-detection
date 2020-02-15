@@ -6,6 +6,7 @@ import pandas as pd
 from keras import backend as K
 from keras.utils.training_utils import multi_gpu_model
 
+
 class BaseModelWrapper():
 
     def __init__(self, config, data_loader, name, is_multi_gpu=False):
@@ -48,10 +49,14 @@ class BaseModelWrapper():
         if model_list != []:
             model_path = model_list[0][1]
             print("Loading model  {} ...\n".format(model_path))
-            # self.model = load_model(model_path, custom_objects=self.custom_objects)
+
             self.model.load_weights(model_path)
+
             print("Model loaded")
             print(self.model.summary())
+        elif self.config.pretrained_model_path:
+            print("Loading pretrained weights")
+            self.model.load_weights(self.config.pretrained_model_path)
         else:
             print("No saved model found.")
 
