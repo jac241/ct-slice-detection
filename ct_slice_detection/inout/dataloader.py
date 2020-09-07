@@ -13,9 +13,6 @@ from ct_slice_detection.inout.generators import threadsafe_generator
 from ct_slice_detection.inout.preprocessing import *
 
 
-np_load_old = np.load
-np.load = lambda *a, **k: np_load_old(*a, allow_pickle=True, **k)
-
 # Monkeypatch load to allow_pickle
 # https://stackoverflow.com/questions/55890813/how-to-fix-object-arrays-cannot-be-loaded-when-allow-pickle-false-for-imdb-loa
 np_load_old = np.load

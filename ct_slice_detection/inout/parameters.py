@@ -25,6 +25,8 @@ def parse_inputs():
     parser.add_parameter('num_val', int, default=20, section='train',
                          help='number of validation samples during training')
     parser.add_parameter('do_crossval', bool, default=False, section='train', help='do cross validation')
+    parser.add_parameter('do_predefined_crossval', bool, default=False, section='train', help='pass in path to pickle files with train, test, and validation indexes set up')
+    parser.add_parameter('predefined_folds_dir', str, default=None)
     parser.add_parameter('flatten_output', bool, default=False,
                          section='train', help='1D output if true; otherwise, the output is 2D')
     parser.add_parameter('use_cache', bool, default=True, section='train', help='cache input image pre-processing')
