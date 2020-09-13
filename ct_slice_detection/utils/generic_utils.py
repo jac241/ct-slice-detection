@@ -39,6 +39,16 @@ class Fold:
         # indices = np.array([self.subject_ids.index(str(i)) for i in fold_subject_ids])
         # return indices
 
-    get_train_indices = partialmethod(load_indices_for_category, "train")
+    # L3 Finder doesn't use validation within training
+    def get_train_indices(self):
+        train = self.load_indices_for_category("train")
+        val = self.load_indices_for_category("val")
+        return np.concatenate(
+            [
+                self.load_indices_for_category("train"),
+                self.load_indices_for_category("val"),
+            ]
+        )
+
     get_val_indices = partialmethod(load_indices_for_category, "val")
     get_test_indices = partialmethod(load_indices_for_category, "test")

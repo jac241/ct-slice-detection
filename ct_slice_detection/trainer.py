@@ -62,7 +62,7 @@ def cross_validate_with_predefined_groups(baseModel, args):
             fold_index=index,
             train_index=fold.get_train_indices(),
             trainer_data=trainer_data,
-            val_index=fold.get_val_indices()
+            val_index=fold.get_test_indices()
         )
 
 

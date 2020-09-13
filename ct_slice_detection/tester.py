@@ -38,7 +38,7 @@ def main():
             test_data.split_data(train_index, val_index)
 
             evaluate_fold(args, baseModel, i, num_splits, test_data)
-    if args.do_predefined_crossval:
+    elif args.do_predefined_crossval:
         test_data = DataLoader(args)
         test_data.load_data()
         for fold_index in range(args.n_splits):
