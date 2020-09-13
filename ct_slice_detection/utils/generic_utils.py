@@ -34,7 +34,7 @@ class Fold:
 
     def load_indices_for_category(self, category):
         path = Path(self.root_path, "fold_{}_{}.pkl".format(self.fold_index, category))
-        with open(path, "rb") as f:
+        with open(str(path), "rb") as f:
             return pickle.load(f)
         # indices = np.array([self.subject_ids.index(str(i)) for i in fold_subject_ids])
         # return indices
