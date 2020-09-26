@@ -51,6 +51,7 @@ def parse_inputs():
                          section='train', help='enable model checkpoint saving')
     parser.add_parameter('test_mode', str, default='test', section='train')
     parser.add_parameter('pretrained_model_path', str, default=None)
+    parser.add_parameter('h5_file_with_subject_ids_for_indices', str, default=None)
 
     args = parser.parse()
 

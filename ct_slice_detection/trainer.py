@@ -56,7 +56,15 @@ def cross_validate_with_predefined_groups(baseModel, args):
     name_loader.load_data()
 
     for index in range(4):
-        fold = Fold(root_path=Path(args.predefined_folds_dir), fold_index=index, subject_ids=list(name_loader.names_val))
+        # seg h5 file indicies --> subject ids
+        fold = Fold(
+            root_path=Path(args.predefined_folds_dir),
+            fold_index=index,
+            subject_ids=list(name_loader.names_val),
+            h5_datafile_path=args.h5_file_with_subject_ids_for_indices,
+            npz_mips_file_path=args.dataset_path,
+        )
+
         train_fold(
             args, baseModel,
             fold_index=index,
